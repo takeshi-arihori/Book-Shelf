@@ -8,7 +8,7 @@
 <技術選定>
 
 フロントエンド: TypeScript
-フレームワーク: React, ,Next.js, Bootstrap
+フレームワーク: React, Next.js, Bootstrap
 バックエンド: Node.js, TypeScript
 データベース: MongoDB
 CI/CD: GitHub Actions
@@ -17,29 +17,27 @@ CI/CD: GitHub Actions
 
 <外部API使用>
 ChatGPT:
-レビューに対してChatGPTを利用して自動で要約を生成する
-レビューの内容に基づいてChatGPTを利用して関連する本を推薦する
+・レビューに対してChatGPTを利用して自動で要約を生成する
+
 Google Books API:
-全文検索
-書籍情報の取得
+・全文検索
+・書籍情報の取得
 
-
-<注意点>
-本アプリケーションで利用する外部APIの利用規約に従い、適切な利用を行う
-開発、テスト、本番環境でのDockerの利用を想定し、適切な設定を行う
-データの永続化を考慮し、適切なバックアップ・リストアの方法を検討する
-セキュリティに配慮し、適切なアクセス制御、認証・認可を実装する
-
-
-<タスクの洗い出しと期限>
-1. Bootstrapの学習
-  期限: 2月28日
-2. Node.jsの学習 
-  期限: 3月1日
-  目標: Node.jsでプロジェクト 「Book Shelf」 を作成
-3. Reactの学習
-4. TypeScriptの学習 (期限: 3月)
-4. Dockerの学習
-5. AWSの学習
-6. API取得の学習
-
+<タスク>
+1. Bootstrap・Gitの復習
+  期限: 3/1
+  目標: 簡単なWebサイトを作成・開発フローの確認
+  
+2. React, Node.js, TypeScriptの学習 
+  期限: 3/7
+  目標: React, Node.jsでプロジェクト 「Book Shelf」 を作成
+  フロントエンド: JavaScript
+  バックエンド: Node.js
+  データベース: MongoDB
+  デプロイ: render
+  
+4. Dockerの学習 (期限: 3/6)
+5. AWSの学習 (期限: 3/10)
+  AWSでデプロイ
+6. API取得の学習 (期限: 3/12)
+7. 作品発表用スライド作成 (期限: 3/12)
