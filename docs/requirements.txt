@@ -29,7 +29,7 @@ Google Books API:
   目標: 簡単なWebサイトを作成・開発フローの確認
   
 2. React, Node.js, TypeScriptの学習 
-  期限: 3/7
+  期限: 3/4
   目標: React, Node.jsでプロジェクト 「Book Shelf」 を作成
   フロントエンド: JavaScript
   バックエンド: Node.js
@@ -37,7 +37,8 @@ Google Books API:
   デプロイ: render
   
 4. Dockerの学習 (期限: 3/6)
-5. AWSの学習 (期限: 3/10)
+5. AWSの学習 (期限: 3/7)
   AWSでデプロイ
-6. API取得の学習 (期限: 3/12)
-7. 作品発表用スライド作成 (期限: 3/12)
+6. API取得の学習 (期限: 3/8)
+7. 追加機能の作成
+8. 作品発表用スライド作成 (期限: 3/10)
