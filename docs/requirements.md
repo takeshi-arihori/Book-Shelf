@@ -1,5 +1,7 @@
 # Book Shelf
 
+### タスク管理はNotionにて
+
 [Notion](https://www.notion.so/Book-Shelf-9c391d7842844114b3e75eb1654a27a1?pvs=4)  
 
 ## 要件定義
