@@ -1,44 +1,5 @@
 プロジェクト名: Book Shelf
+　プロジェクト詳細はNotionに記載: 
+ 
+ https://www.notion.so/Book-Shelf-9c391d7842844114b3e75eb1654a27a1?pvs=4
 
-<概要>
-書籍の登録・管理ができるアプリケーション。ユーザーは書籍のタイトル、著者、出版社、ISBNコード、感想などを登録できる。
-登録された書籍は一覧表示され、ユーザーは自分の本棚として利用できる。
-また、ChatGPTを利用した自動要約機能や、Google Books APIを利用した全文検索機能、書籍情報の取得機能を実装し、書籍の検索・閲覧をサポートする。
-
-<技術選定>
-
-フロントエンド: TypeScript
-フレームワーク: React, Next.js, Bootstrap
-バックエンド: Node.js, TypeScript
-データベース: MongoDB
-CI/CD: GitHub Actions
-デプロイ: AWS EC2
-コンテナ: Docker
-
-<外部API使用>
-ChatGPT:
-・レビューに対してChatGPTを利用して自動で要約を生成する
-
-Google Books API:
-・全文検索
-・書籍情報の取得
-
-<タスク>
-1. Bootstrap・Gitの復習
-  期限: 3/1
-  目標: 簡単なWebサイトを作成・開発フローの確認
-  
-2. React, Node.js, TypeScriptの学習 
-  期限: 3/4
-  目標: React, Node.jsでプロジェクト 「Book Shelf」 を作成
-  フロントエンド: JavaScript
-  バックエンド: Node.js
-  データベース: MongoDB
-  デプロイ: render
-  
-4. Dockerの学習 (期限: 3/6)
-5. AWSの学習 (期限: 3/7)
-  AWSでデプロイ
-6. API取得の学習 (期限: 3/8)
-7. 追加機能の作成
-8. 作品発表用スライド作成 (期限: 3/10)
