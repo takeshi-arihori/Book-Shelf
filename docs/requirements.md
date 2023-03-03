@@ -37,12 +37,3 @@
 - 読書チャレンジ機能
 - 読書会機能
 
-| 種類 | 技術 |
-| --- | --- |
-| フロントエンド | TypeScript |
-| バックエンド | TypeScript, Node.js |
-| データベース | MongoDB |
-| クラウド | AWS EC2 |
-| フレームワーク | Bootstrap, Express, React |
-| CI・CD | GitHub Actions |
-| コンテナ | Docker |
