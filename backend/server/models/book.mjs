@@ -25,7 +25,7 @@ const bookSchema = Schema({
     type: String,
     required: true
   }
-});
+}, { timestamps: true });
 
 const Book = model('Book', bookSchema);
 export default Book;
