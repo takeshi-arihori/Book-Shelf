@@ -10,7 +10,7 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error.response.data.msg || '時間をおいてお試しください。');
 });
 
-const ENDPOINT_URL = "http://localhost:8080/api/books";
+const ENDPOINT_URL = "/api/books";
 
 const bookApi = {
 
@@ -32,6 +32,7 @@ const bookApi = {
   },
   async patch(book) {
     const result = await axios.patch(ENDPOINT_URL + "/" + book._id, book);
+    debugger;
     return result.data;
   },
 };

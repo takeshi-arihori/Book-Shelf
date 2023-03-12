@@ -1,11 +1,9 @@
-function requestErrorHandler(controller) {
+export const requestErrorHandler = function (controller) {
   return async function (req, res, next) {
     try {
-      await controller(req, res);
+      return await controller(req, res);
     } catch (err) {
-      next(err);
+      next(err.stack);
     }
-  }
-}
-
-export {requestErrorHandler};
+  };
+};
