@@ -1,31 +1,46 @@
+import path from "path";
 import express from "express";
-import env from "dotenv";
-env.config();
-
 import apiRoutes from "./api-routes/index.mjs";
 import "./helpers/db.mjs";
-import { ResultWithContext } from "express-validator/src/chain/context-runner-impl.js";
 
 const app = express();
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
-// JSONを受け取る
+// corsエラーの設定 ここから↓
+import cors from "cors";
+
+// app.use(cors({
+//   // どこからのアクセスを許可するか。オリジン(スキーマ、ドメイン、ポート)を記す。
+//   origin: "http://localhost:3000",
+//   // どのメソッドを許可するかは配列で記述。書かない場合は全て通す。
+//   // methods: ["GET", "POST", "PUT", "DELETE"],
+//   // クッキーを残すかどうか
+//   // credentials: true,
+// }));
+// corsエラーの設定 ここまで
+
+app.use(express.static('build'));
+
 app.use(express.json());
 
-// API
-app.use('/api', apiRoutes);
+// APIのPathに一致する処理
+app.use("/api", apiRoutes);
+
+// どのPathが来てもindex.htmlを返す設定
+app.get('*', (req, res) => {
+  const pathIndex = path.resolve('build', 'index.html');
+  res.sendFile(pathIndex);
+});
+
+app.use(function (req, res) {
+  res.status(404).send("Page Not Found");
+});
 
 app.use(function (err, req, res, next) {
-  res.status(404).json({ msg: "Page Not Found" });
-})
-
-app.use(function (err, req, res, next) {
-  if (res.headersSent) {
-    return next(err);
-  }
-  res.status(500).json({ msg: "不正なエラーが発生しました。" })
-})
+  console.log(err);
+  res.status(500).json({ msg: "予期せぬエラーが発生しました。" });
+});
 
 app.listen(port, () => {
-  console.log(`Server Start: http://localhost:${port}`);
-})
+  console.log(`Server start: http://localhost:${port}`);
+});
