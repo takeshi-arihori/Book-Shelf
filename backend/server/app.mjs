@@ -1,8 +1,9 @@
 import express from "express";
-import apiRoutes from "./server/api-routes/index.mjs";
 import env from "dotenv";
-import "./server/helpers/db.mjs";
 env.config();
+
+import apiRoutes from "./api-routes/index.mjs";
+import "./helpers/db.mjs";
 
 const app = express();
 const port = process.env.port || 8080;
