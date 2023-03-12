@@ -1,7 +1,12 @@
 {
-  "name": "frontend",
+  "name": "bookshelf_frontend",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.21",
+    "npm-run-all": "^4.1.5"
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
@@ -24,6 +29,8 @@
     "eslint": "^8.3.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
+    "express": "^4.18.2",
+    "express-validator": "^6.15.0",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.5.0",
@@ -32,6 +39,7 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "mini-css-extract-plugin": "^2.4.5",
+    "mongoose": "^6.10.2",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
@@ -58,7 +66,10 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "dev": "concurrently \"npm:dev:api\" \"npm:dev:client\"",
+    "dev2": "run-p dev:*",
+    "dev:api": "nodemon server/app.mjs",
+    "dev:client": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
