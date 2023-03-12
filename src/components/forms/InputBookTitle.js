@@ -10,7 +10,7 @@ const InputBookTitle = ({ register, errors }) => {
         placeholder="タイトル"
         {...register("title", {
           required: "タイトルを入力してください。",
-          maxLength: { value: 10, message: `10文字以内で入力してください。` },
+          maxLength: { value: 40, message: `40文字以内で入力してください。` },
         })}
       />
       {errors.title && <div className="error-msg">{errors.title.message}</div>}
