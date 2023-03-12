@@ -1,21 +1,23 @@
 import express from "express";
 // // 飛んできたJSONをチェック
 import { body } from "express-validator";
+import { requestErrorHandler } from "../helpers/helper.mjs";
 import { getAllBooks, getBookById, registBook, updateBook, deleteBook } from "../controllers/books.mjs";
 
 // Routerを取得
 const router = express.Router();
 
+
 // 本の一覧を取得
 router.get(
   '/',
-  getAllBooks
+  requestErrorHandler(getAllBooks)
 );
 
 // id検索
 router.get(
   '/:id',
-  getBookById
+  requestErrorHandler(getBookById)
 );
 
 // POST
@@ -26,7 +28,7 @@ router.post(
   body('description').notEmpty(),
   body('comment').notEmpty(),
   body('rating').notEmpty().isInt({ min: 1, max: 5 }),
-  registBook
+  requestErrorHandler(registBook)
 );
 
 // validator.js
@@ -39,13 +41,13 @@ router.patch(
   body('description').optional().notEmpty(),
   body('comment').optional().notEmpty(),
   body('rating').optional().notEmpty().isInt({ min: 1, max: 5 }),
-  updateBook
-  );
+  requestErrorHandler(updateBook)
+);
 
-  // 削除
-  router.delete(
-    '/:id',
-    deleteBook
-  );
+// 削除
+router.delete(
+  '/:id',
+  requestErrorHandler(deleteBook)
+);
 
-  export default router;
+export default router;
