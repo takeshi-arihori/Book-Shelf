@@ -3,6 +3,10 @@ import express from "express";
 import apiRoutes from "./api-routes/index.mjs";
 import "./helpers/db.mjs";
 
+// 認証機能途中
+import passport from "passport";
+import LocalStrategy from "passport-local";
+
 const app = express();
 const port = process.env.PORT || 8080;
 
