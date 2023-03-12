@@ -23,8 +23,10 @@ app.use(express.static('build'));
 
 app.use(express.json());
 
+// APIのPathに一致する処理
 app.use("/api", apiRoutes);
 
+// どのPathが来てもindex.htmlを返す設定
 app.get('*', (req, res) => {
   const pathIndex = path.resolve('build', 'index.html');
   res.sendFile(pathIndex);
