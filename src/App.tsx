@@ -5,11 +5,24 @@ import { LoginPage } from './pages/LoginPage';
 import { HomePage } from './pages/HomePage';
 import { Builder } from './pages/Builder';
 import { LibraryApp } from './pages/LibraryApp';
-import { useAuth } from './hooks/useAuth';
 import { Layout } from './components/common/Layout';
+import { useSelector } from 'react-redux';
+import type { RootState } from './store/store';
+
+const LoadingSpinner = () => (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+);
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, initialized } = useSelector((state: RootState) => state.auth);
+
+    // 認証状態が初期化されるまでローディングを表示
+    if (!initialized) {
+        return <LoadingSpinner />;
+    }
+
     return isAuthenticated ? <Layout>{children}</Layout> : <Navigate to="/login" />;
 };
 

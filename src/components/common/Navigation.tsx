@@ -1,102 +1,76 @@
-import { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 export const Navigation = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
-    const { logout } = useAuth();
-
-    const navItems = [
-        { to: '/', label: 'ホーム', icon: '🏠' },
-        { to: '/builder', label: 'ビルダー', icon: '🛠️' },
-        { to: '/library', label: 'ライブラリ', icon: '📚' },
-    ];
+    const { isAuthenticated, logout } = useAuth();
 
     return (
-        <nav className="bg-white shadow-lg">
-            <div className="max-w-7xl mx-auto px-4">
+        <nav className="bg-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)] border-b-2 border-[#e2e8f0]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex">
-                        <div className="flex-shrink-0 flex items-center">
-                            <span className="text-xl font-bold">Computer Builder</span>
-                        </div>
-                    </div>
-
-                    {/* デスクトップメニュー */}
-                    <div className="hidden md:flex md:items-center md:space-x-4">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.to}
-                                to={item.to}
-                                className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === item.to
-                                    ? 'bg-gray-900 text-white'
-                                    : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
-                            >
-                                <span className="mr-2">{item.icon}</span>
-                                {item.label}
-                            </Link>
-                        ))}
-                        <button
-                            onClick={() => logout()}
-                            className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+                        <Link
+                            to="/"
+                            className="flex items-center px-4 text-[#0f172a] font-bold text-xl hover:text-[#4338ca] transition-colors duration-200"
                         >
-                            ログアウト
-                        </button>
+                            Computer Builder
+                        </Link>
                     </div>
-
-                    {/* モバイルメニューボタン */}
-                    <div className="md:hidden flex items-center">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
-                        >
-                            <span className="sr-only">メニューを開く</span>
-                            {!isOpen ? (
-                                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            ) : (
-                                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            )}
-                        </button>
+                    <div className="flex items-center space-x-4">
+                        {isAuthenticated ? (
+                            <>
+                                <Link
+                                    to="/library"
+                                    className={`px-4 py-2 rounded-md font-medium ${location.pathname === '/library'
+                                        ? 'bg-[#4338ca] text-white'
+                                        : 'text-[#334155] hover:bg-[#e2e8f0]'
+                                        } transition-colors duration-200`}
+                                >
+                                    ライブラリ
+                                </Link>
+                                <Link
+                                    to="/profile"
+                                    className={`px-4 py-2 rounded-md font-medium ${location.pathname === '/profile'
+                                        ? 'bg-[#4338ca] text-white'
+                                        : 'text-[#334155] hover:bg-[#e2e8f0]'
+                                        } transition-colors duration-200`}
+                                >
+                                    プロフィール
+                                </Link>
+                                <button
+                                    onClick={logout}
+                                    className="px-4 py-2 text-[#334155] hover:bg-[#e2e8f0] rounded-md font-medium transition-colors duration-200"
+                                >
+                                    ログアウト
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className={`px-4 py-2 rounded-md font-medium ${location.pathname === '/login'
+                                        ? 'bg-[#4338ca] text-white'
+                                        : 'text-[#334155] hover:bg-[#e2e8f0]'
+                                        } transition-colors duration-200`}
+                                >
+                                    ログイン
+                                </Link>
+                                <Link
+                                    to="/register"
+                                    className={`px-4 py-2 rounded-md font-medium ${location.pathname === '/register'
+                                        ? 'bg-[#4338ca] text-white'
+                                        : 'text-[#334155] hover:bg-[#e2e8f0]'
+                                        } transition-colors duration-200`}
+                                >
+                                    新規登録
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
-
-            {/* モバイルメニュー */}
-            {isOpen && (
-                <div className="md:hidden">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.to}
-                                to={item.to}
-                                className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === item.to
-                                    ? 'bg-gray-900 text-white'
-                                    : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
-                                onClick={() => setIsOpen(false)}
-                            >
-                                <span className="mr-2">{item.icon}</span>
-                                {item.label}
-                            </Link>
-                        ))}
-                        <button
-                            onClick={() => {
-                                logout();
-                                setIsOpen(false);
-                            }}
-                            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
-                        >
-                            ログアウト
-                        </button>
-                    </div>
-                </div>
-            )}
         </nav>
     );
 }; 

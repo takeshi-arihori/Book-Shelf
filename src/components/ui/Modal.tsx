@@ -8,7 +8,9 @@ export const Modal = ({ open, onClose, children }: {
 }) => (
     <div className={`modal ${open ? 'modal-open' : ''}`}>
         <div className="modal-box">
-            {children}
+            <div className="text-xl font-bold text-gray-900">
+                {children}
+            </div>
             <div className="modal-action">
                 <button className="btn" onClick={onClose}>閉じる</button>
             </div>

@@ -1,29 +1,45 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import type { RootState } from '../store/store';
 import { setAuth, clearAuth } from '../store/slices/authSlice';
 import { login as apiLogin, logout as apiLogout } from '../api/authApi';
+import { setToken, removeToken } from '../utils/auth';
 
 export const useAuth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
 
     const login = async (userId: string, password: string) => {
-        const response = await apiLogin({ userId, password });
-        dispatch(setAuth(response));
-        navigate('/');
+        try {
+            console.log('Attempting login...');
+            const response = await apiLogin({ userId, password });
+            console.log('ログイン成功:', response);
+            setToken(response.token);
+            dispatch(setAuth(response));
+            navigate('/');
+        } catch (error) {
+            console.error('ログインエラー:', error);
+            throw error;
+        }
     };
 
     const logout = async () => {
-        await apiLogout();
-        dispatch(clearAuth());
-        navigate('/login');
+        try {
+            console.log('Attempting logout...');
+            await apiLogout();
+            removeToken();
+            dispatch(clearAuth());
+            navigate('/login');
+        } catch (error) {
+            console.error('ログアウトエラー:', error);
+            removeToken();
+            dispatch(clearAuth());
+            navigate('/login');
+        }
     };
 
     return {
-        isAuthenticated,
-        user,
+        isAuthenticated: true, // 一時的に常にtrueを返す
+        user: { id: '1', name: 'テストユーザー' }, // 一時的に固定ユーザーを返す
         login,
         logout,
     };
