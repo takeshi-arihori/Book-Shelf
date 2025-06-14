@@ -48,3 +48,16 @@ export const checkIfBookExists = async (userId: string, googleBooksId: string) =
   }
   return !!data; // データがあればtrue、なければfalse
 };
+
+export const removeBookFromBookshelf = async (userId: string, googleBooksId: string) => {
+  const { error } = await supabase
+    .from('bookshelf')
+    .delete()
+    .eq('user_id', userId)
+    .eq('google_books_id', googleBooksId);
+
+  if (error) {
+    console.error('Error removing book from bookshelf:', error);
+    throw error;
+  }
+};

@@ -45,7 +45,10 @@ export function MyBookshelfPage() {
   return (
     <div className="panel rounded-2xl shadow-lg flex flex-col h-full">
       <header className="p-6 border-b border-gray-700">
-        <h2 className="text-xl font-bold text-white">マイ本棚</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold text-white">マイ本棚</h2>
+          <Link to="/" className="text-sm text-blue-400 hover:underline">検索に戻る</Link>
+        </div>
       </header>
       <div className="flex-grow p-6 overflow-y-auto custom-scrollbar">
         {loading ? (
