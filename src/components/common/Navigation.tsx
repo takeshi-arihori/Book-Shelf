@@ -23,7 +23,7 @@ export function Navigation() {
 
   return (
     <nav className="mt-6 flex justify-center gap-4">
-      <NavLink to="/book" className={getNavLinkClass}>書籍検索</NavLink>
+      <NavLink to="/" className={getNavLinkClass}>書籍検索</NavLink>
       <NavLink to="/bookshelf" className={getNavLinkClass}>マイ本棚</NavLink>
       {isAuthenticated ? (
         <button onClick={handleSignOut} className="nav-link px-4 py-2 rounded-md font-semibold">ログアウト</button>

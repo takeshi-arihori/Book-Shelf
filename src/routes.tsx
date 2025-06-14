@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import BookManagerPage from './pages/BookManagerPage';
 import { HomePage } from './pages/HomePage';
 import { MyBookshelfPage } from './pages/MyBookshelfPage';
 import { BookDetailPage } from './pages/BookDetailPage';
@@ -16,7 +15,6 @@ export interface RouteDefinition {
 
 export const appRoutes: RouteDefinition[] = [
   { path: '/', name: 'Home', component: HomePage, inNav: true, index: true },
-  { path: '/book', name: 'Book Manager', component: BookManagerPage, inNav: true },
   { path: '/bookshelf', name: 'My Bookshelf', component: MyBookshelfPage, inNav: true },
   { path: '/book/:bookId', name: 'Book Detail', component: BookDetailPage, inNav: false },
   { path: '/login', name: 'Login', component: LoginPage, inNav: false },
