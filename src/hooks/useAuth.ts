@@ -11,11 +11,11 @@ export const useAuth = () => {
     const login = async (userId: string, password: string) => {
         try {
             console.log('Attempting login...');
-            const response = await apiLogin({ userId, password });
+        const response = await apiLogin({ userId, password });
             console.log('ログイン成功:', response);
             setToken(response.token);
-            dispatch(setAuth(response));
-            navigate('/');
+        dispatch(setAuth(response));
+        navigate('/');
         } catch (error) {
             console.error('ログインエラー:', error);
             throw error;
@@ -25,15 +25,15 @@ export const useAuth = () => {
     const logout = async () => {
         try {
             console.log('Attempting logout...');
-            await apiLogout();
+        await apiLogout();
             removeToken();
             dispatch(clearAuth());
             navigate('/login');
         } catch (error) {
             console.error('ログアウトエラー:', error);
             removeToken();
-            dispatch(clearAuth());
-            navigate('/login');
+        dispatch(clearAuth());
+        navigate('/login');
         }
     };
 

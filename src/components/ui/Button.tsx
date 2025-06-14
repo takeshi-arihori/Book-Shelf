@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { ButtonHTMLAttributes } from 'react';
 
 export const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => (
