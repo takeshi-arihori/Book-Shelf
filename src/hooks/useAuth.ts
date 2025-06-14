@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setAuth, clearAuth } from '../store/slices/authSlice';
-import { login as apiLogin, logout as apiLogout } from '../api/authApi';
+// import { login as apiLogin, logout as apiLogout } from '../api/authApi';
+import { signOut as apiLogout } from '../api/authApi';
 import { setToken, removeToken } from '../utils/auth';
 
 export const useAuth = () => {
@@ -9,17 +10,17 @@ export const useAuth = () => {
     const navigate = useNavigate();
 
     const login = async (userId: string, password: string) => {
-        try {
-            console.log('Attempting login...');
-        const response = await apiLogin({ userId, password });
-            console.log('ログイン成功:', response);
-            setToken(response.token);
-        dispatch(setAuth(response));
-        navigate('/');
-        } catch (error) {
-            console.error('ログインエラー:', error);
-            throw error;
-        }
+        // try {
+        //     console.log('Attempting login...');
+        // const response = await apiLogin({ userId, password });
+        //     console.log('ログイン成功:', response);
+        //     setToken(response.token);
+        // dispatch(setAuth(response));
+        // navigate('/');
+        // } catch (error) {
+        //     console.error('ログインエラー:', error);
+        //     throw error;
+        // }
     };
 
     const logout = async () => {
