@@ -1,5 +1,5 @@
 import api from './index';
-import { OrderRequest, OrderResponse } from '../types/api';
+import type { OrderRequest, OrderResponse } from '../types/api';
 
 export const createOrder = async (order: OrderRequest): Promise<OrderResponse> => {
     const { data } = await api.post<OrderResponse>('/orders', order);
