@@ -24,7 +24,6 @@ export const BookSearch = () => {
         setSearchResults([]);
 
         try {
-            console.log('検索クエリ:', searchQuery);
             const response = await searchBooks({ query: searchQuery });
             console.log('APIレスポンス:', response);
             setSearchResults(response.items || []);

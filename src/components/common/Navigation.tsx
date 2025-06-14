@@ -28,7 +28,7 @@ export function Navigation() {
       {isAuthenticated ? (
         <button onClick={handleSignOut} className="nav-link px-4 py-2 rounded-md font-semibold">ログアウト</button>
       ) : (
-        <NavLink to="/login" className={getNavLinkClass}>ログイン</NavLink>
+        <NavLink to="/signup" className={getNavLinkClass}>サインアップ</NavLink>
       )}
     </nav>
   );

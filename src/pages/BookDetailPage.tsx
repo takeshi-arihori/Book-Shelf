@@ -4,7 +4,7 @@ import { fetchBookById } from '../api/bookApi';
 import { useToast } from '../store/contexts/ToastContext';
 import type { Book } from '../api/bookApi';
 import { useAuthContext } from '../store/contexts/AuthContext';
-import { addBookToBookshelf } from '../api/bookshelfApi';
+import { addBookToBookshelf, checkIfBookExists } from '../api/bookshelfApi';
 
 export function BookDetailPage() {
   const { bookId } = useParams<{ bookId: string }>();
@@ -14,6 +14,7 @@ export function BookDetailPage() {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isBookAdded, setIsBookAdded] = useState(false);
 
   useEffect(() => {
     if (bookId) {
@@ -34,11 +35,30 @@ export function BookDetailPage() {
     }
   }, [bookId]);
 
+  useEffect(() => {
+    if (session?.user && bookId) {
+      const checkBook = async () => {
+        try {
+          const exists = await checkIfBookExists(session.user.id, bookId);
+          setIsBookAdded(exists);
+        } catch (err) {
+          console.error('Failed to check if book exists:', err);
+        }
+      };
+      checkBook();
+    }
+  }, [session, bookId]);
+
   const handleBackToSearch = () => {
     navigate('/book-manager');
   };
 
   const handleAddToShelf = async () => {
+    if (isBookAdded) {
+      showToast('この本は既に追加されています。', 'info');
+      return;
+    }
+
     if (!session?.user) {
       showToast('本棚に追加するにはログインが必要です。', 'error');
       navigate('/login');
@@ -56,6 +76,7 @@ export function BookDetailPage() {
       try {
         await addBookToBookshelf(bookData);
         showToast('本棚に追加しました', 'success');
+        setIsBookAdded(true);
       } catch (error) {
         console.error('Error adding book to bookshelf:', error);
         showToast('追加に失敗しました', 'error');
@@ -101,7 +122,7 @@ export function BookDetailPage() {
         )}
       </div>
       <div className="mt-8 flex gap-4">
-        <button id="add-to-shelf-btn" onClick={handleAddToShelf} className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-lg disabled:bg-gray-600 disabled:cursor-not-allowed">本棚に追加</button>
+        <button id="add-to-shelf-btn" onClick={handleAddToShelf} className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-lg disabled:bg-gray-600 disabled:cursor-not-allowed" disabled={isBookAdded}>{isBookAdded ? '追加済み' : '本棚に追加'}</button>
         <button id="back-to-search-btn" onClick={handleBackToSearch} className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-lg shadow-lg">検索に戻る</button>
       </div>
     </div>
