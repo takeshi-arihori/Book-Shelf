@@ -32,65 +32,68 @@ export interface Book {
 const API_BASE_URL = 'https://www.googleapis.com/books/v1';
 const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
 
+// APIキーが設定されていない場合、コンソールにエラーを出力して問題を明確にする
+if (!API_KEY) {
+    console.error('Google Books API key is not set. Please set VITE_GOOGLE_BOOKS_API_KEY in your .env file.');
+}
+
 export const searchBooks = async ({ query, maxResults = 10, startIndex = 0 }: BookSearchParams): Promise<BookSearchResponse> => {
+    // APIキーがない場合は、空の結果を返して処理を中断する
+    if (!API_KEY) {
+        console.error('API key is missing. Cannot search for books.');
+        return { items: [], totalItems: 0 };
+    }
+
     try {
         const url = new URL(`${API_BASE_URL}/volumes`);
         url.searchParams.append('q', query);
-        url.searchParams.append('maxResults', maxResults.toString());
         url.searchParams.append('startIndex', startIndex.toString());
-        if (API_KEY) {
-            url.searchParams.append('key', API_KEY);
-        }
-
-        console.log('APIリクエストURL:', url.toString());
+        url.searchParams.append('maxResults', maxResults.toString());
+        url.searchParams.append('key', API_KEY);
 
         const response = await fetch(url.toString());
 
         if (!response.ok) {
-            const errorData = await response.json().catch(() => null);
-            console.error('APIエラーレスポンス:', errorData);
-            throw new Error(`本の検索に失敗しました: ${response.status} ${response.statusText}`);
+            const errorText = await response.text();
+            console.error('API Error Response:', errorText);
+            throw new Error(`Failed to search books: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log('APIレスポンスデータ:', data);
-
-        if (!data.items) {
-            return {
-                items: [],
-                totalItems: 0
-            };
-        }
 
         return {
-            items: data.items,
+            items: data.items || [],
             totalItems: data.totalItems || 0,
         };
     } catch (error) {
-        console.error('本の検索エラー:', error);
+        console.error('Error searching books:', error);
+        // エラーを再スローして、呼び出し元でハンドリングできるようにする
         throw error;
     }
 };
 
-export const getBookById = async (id: string): Promise<Book> => {
+export const fetchBookById = async (id: string): Promise<Book | null> => {
+    if (!API_KEY) {
+        console.error('API key is missing. Cannot get book by ID.');
+        return null;
+    }
+
     try {
         const url = new URL(`${API_BASE_URL}/volumes/${id}`);
-        if (API_KEY) {
-            url.searchParams.append('key', API_KEY);
-        }
+        url.searchParams.append('key', API_KEY);
 
         const response = await fetch(url.toString());
 
         if (!response.ok) {
-            const errorData = await response.json().catch(() => null);
-            console.error('APIエラーレスポンス:', errorData);
-            throw new Error(`本の詳細取得に失敗しました: ${response.status} ${response.statusText}`);
+            const errorText = await response.text();
+            console.error('API Error Response:', errorText);
+            throw new Error(`Failed to get book by ID: ${response.status} ${response.statusText}`);
         }
 
         return await response.json();
     } catch (error) {
-        console.error('本の詳細取得エラー:', error);
+        console.error(`Error fetching book with ID ${id}:`, error);
         throw error;
     }
-}; 
+};
  

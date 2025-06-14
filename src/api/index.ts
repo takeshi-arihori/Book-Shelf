@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from '../store/store';
+import { supabase } from '../lib/supabaseClient';
 import { getToken, isTokenExpired } from '../utils/auth';
 
 const api = axios.create({
@@ -22,7 +22,7 @@ api.interceptors.response.use(
     async (error) => {
         if (error.response?.status === 401) {
             // トークンが無効な場合、ログアウト処理を実行
-            store.dispatch({ type: 'auth/clearAuth' });
+            await supabase.auth.signOut();
             window.location.href = '/login';
         }
         return Promise.reject(error);
