@@ -114,7 +114,7 @@ export const BookSearch = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="タイトル、著者名..."
-                        className="search-input w-full rounded-md p-2 text-white"
+                        className="search-input w-full rounded-md p-2 text-white flex-grow"
                     />
                     <Button type="submit" disabled={loading} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg">
                         {loading ? '...' : '検索'}

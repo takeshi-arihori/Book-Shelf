@@ -32,7 +32,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="panel max-w-md mx-auto mt-10 rounded-2xl shadow-lg p-8">
+    <div className="panel max-w-md mx-auto rounded-2xl shadow-lg p-8">
       <h2 className="text-2xl font-bold text-center">新規登録</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -42,6 +42,7 @@ const SignUpPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="w-full"
           />
         </div>
         <div>
@@ -50,6 +51,7 @@ const SignUpPage = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="w-full"
           />
         </div>
         <div>
@@ -59,6 +61,7 @@ const SignUpPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="w-full"
           />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>

@@ -5,7 +5,7 @@ import { ToastContainer } from '../ui/ToastContainer';
 
 export function Layout() {
   return (
-    <div id="app" className="max-w-7xl mx-auto p-4 md:p-6 h-screen flex flex-col">
+    <div id="app" className="max-w-7xl mx-auto p-4 md:p-6 h-screen flex flex-col overflow-x-hidden">
       <Header />
       <Navigation />
       <main className="flex-grow min-h-0">

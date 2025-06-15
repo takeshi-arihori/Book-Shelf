@@ -63,6 +63,5 @@ export default {
         },
     },
     plugins: [],
-    important: true, // すべてのTailwindクラスに!importantを追加
 } 
  

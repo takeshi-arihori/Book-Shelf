@@ -40,7 +40,7 @@ export function MyBookshelfPage() {
     };
 
     fetchBooks();
-  }, [session, navigate]);
+  }, [session]);
 
   return (
     <div className="panel rounded-2xl shadow-lg flex flex-col h-full">
